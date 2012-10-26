@@ -1,0 +1,2 @@
+class FBApiCallError(Exception):
+    pass
