@@ -1,9 +1,9 @@
-Crawler for collecting information of your app users
+Crawler for collecting information of Facebook App users
 
 Dependencies:
 	gevent 0.13.8
 
-Description 
+Description\n
 	Crawler expects the userid and corresponding access_token in CSV format. Crawler crawls information of "n" users concurrently as specified by pool_size in crawler.cfg.
 
 
