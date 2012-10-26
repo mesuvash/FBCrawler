@@ -7,7 +7,8 @@ Dependencies
 Description
 ============
 
-	Crawler expects the userid and corresponding access_token in CSV format. Crawler crawls information of "n" users concurrently as specified by pool_size in crawler.cfg.
+	Crawler expects input file in CSV format containing userid and corresponding access_token infromation.
+	Crawler fetch information of "n" users concurrently as specified by pool_size in crawler.cfg.
 
 
 Configuration File (crawler.cfg)
