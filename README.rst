@@ -13,20 +13,20 @@ Description
 
 Configuration File (crawler.cfg)
 =================================
-	source => path of the csv file containing userid and access_token information
+	- source => path of the csv file containing userid and access_token information
 
-	pool_size => specifies the total number users to fetch concurrently
+	- pool_size => specifies the total number users to fetch concurrently
 
-	db_path => path of database to store fetched data
+	- db_path => path of database to store fetched data
 
-	db_schema => schema of database
+	- db_schema => schema of database
 
-	failed => file path to store information of the failed crawl 
+	- failed => file path to store information of the failed crawl 
 
-	log => log file for the program
+	- log => log file for the program
 
 Running Crawler
 ====================
 	- Configure the crawler.cfg
 	- run "python crawler.py"
-	
+
