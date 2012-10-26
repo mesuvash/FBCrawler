@@ -13,9 +13,9 @@ Description
 
 Configuration File (crawler.cfg)
 =================================
-	source => path of the csv file containing userid, access_token information
+	source => path of the csv file containing userid and access_token information
 
-	pool_size => specifies the total number users info to fetch concurrently
+	pool_size => specifies the total number users to fetch concurrently
 
 	db_path => path of database to store fetched data
 
