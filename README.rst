@@ -23,3 +23,5 @@ Configuration File (crawler.cfg)
 
 	failed => file path to store information of the failed crawl 
 
+	log => log file for the program
+

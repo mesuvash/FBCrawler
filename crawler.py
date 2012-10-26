@@ -22,7 +22,7 @@ def retryOnError(tries=3):
     return funcwrapper
 
 def getLogger(log_path):
-    logger = logging.getLogger(__name__)
+    logger = logging.getLogger("Crawler")
     logger.setLevel(logging.INFO)
     handler = logging.FileHandler(log_path)
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -69,7 +69,6 @@ class Crawler(object):
     #retry 3 times on exception
     @retryOnError(3)
     def __scrape_data(self,uid,access_token):
-        raise Exception
         basic_info = get_fb_basic_info(uid, access_token)
         likes_info = get_fb_likes(uid, access_token,2)
         return basic_info,likes_info 
@@ -108,6 +107,7 @@ class Crawler(object):
         self.p.join()
         
     def crawl(self):
+        self.logger.info("Crawler started")
         self.__fetch(self.source_path)
        
         #attempt to recrawl the failed items
@@ -117,6 +117,8 @@ class Crawler(object):
         self.__configFailedFile()
         self.__fetch(temp_path)  
         os.remove(temp_path)
+        self.conn.close()
+        self.logger.info("Crawler Stopped")
 
 if __name__ == "__main__":
     crawler = Crawler("crawler.cfg")
