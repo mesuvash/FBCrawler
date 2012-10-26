@@ -7,8 +7,8 @@ Dependencies
 Description
 ============
 
-	Crawler expects input file in CSV format containing userid and corresponding access_token infromation.
-	Crawler fetch information of "n" users concurrently as specified by pool_size in crawler.cfg.
+	Crawler expects a file in CSV format containing userid and corresponding access_token infromation.
+	Crawler fetches information of "n" users concurrently as specified by pool_size in crawler.cfg.
 
 
 Configuration File (crawler.cfg)
@@ -23,4 +23,4 @@ Configuration File (crawler.cfg)
 
 	failed => path of file to store the information of user whose information couldnt be collected by crawler
 
-	
+
