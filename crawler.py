@@ -78,6 +78,7 @@ class Crawler(object):
             status,uid,access_token = result
             self.failed.write(uid+","+access_token+"\n")
         else:
+            print result
             uid = result[1]["id"]
             result = map(lambda y: json.dumps(y),result)
             status,basic_info,likes_info = result
@@ -99,13 +100,13 @@ class Crawler(object):
         self.__fetch(self.source_path)
        
         #attempt to recrawl the failed items
+        
         temp_path = "temp_recovery"
         os.rename(self.failed_path, temp_path)
         self.__configFailedFile()
         self.__fetch(temp_path)  
         os.remove(temp_path)
-        
-        
+
 if __name__ == "__main__":
     crawler = Crawler("crawler.cfg")
     crawler.crawl()
