@@ -15,12 +15,11 @@ Configuration File (crawler.cfg)
 =================================
 	source => path of the csv file containing userid, access_token information
 
-	pool_size => specifies the total number of concurrent user fetch at a time
+	pool_size => specifies the total number users info to fetch concurrently
 
-	db_path => path to database to store fetched data
+	db_path => path of database to store fetched data
 
 	db_schema => schema of database
 
-	failed => path of file to store the information of user whose information couldnt be collected by crawler
-
+	failed => file path to store information of the failed crawl 
 
