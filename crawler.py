@@ -7,6 +7,7 @@ import csv
 import os
 import sqlite3
 import json
+import logging
 
 def retryOnError(tries=3):
     def funcwrapper(fn):
@@ -19,6 +20,15 @@ def retryOnError(tries=3):
                         raise e
         return wrapper
     return funcwrapper
+
+def getLogger(log_path):
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.INFO)
+    handler = logging.FileHandler(log_path)
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
+    return logger
 
 class Crawler(object):
 
@@ -36,8 +46,8 @@ class Crawler(object):
         self.failed_path = self.config.get("CRAWLER_CONFIG", "failed")
         self.database_path = self.config.get("CRAWLER_CONFIG", "db_path")
         self.schema = self.config.get("CRAWLER_CONFIG", "db_schema")
-        #self.log_path = self.config.get("CRAWLER_CONFIG", "log")
-        # self.logger = getLogger(self.log_path)
+        self.log_path = self.config.get("CRAWLER_CONFIG", "log")
+        self.logger = getLogger(self.log_path)
 
     def __configDB(self):
         path_exists = os.path.exists(self.database_path)
@@ -59,6 +69,7 @@ class Crawler(object):
     #retry 3 times on exception
     @retryOnError(3)
     def __scrape_data(self,uid,access_token):
+        raise Exception
         basic_info = get_fb_basic_info(uid, access_token)
         likes_info = get_fb_likes(uid, access_token,2)
         return basic_info,likes_info 
@@ -67,7 +78,8 @@ class Crawler(object):
         try:
             basic_info,likes_info = self.__scrape_data(uid, access_token)
             return True,basic_info,likes_info
-        except:
+        except Exception,e:
+            self.logger.exception(e)
             return False,uid,access_token
 
     #callback function called after scraping data
