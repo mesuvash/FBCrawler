@@ -25,3 +25,8 @@ Configuration File (crawler.cfg)
 
 	log => log file for the program
 
+Running Crawler
+====================
+	- Configure the crawler.cfg
+	- run "python crawler.py"
+	
