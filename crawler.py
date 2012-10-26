@@ -78,7 +78,6 @@ class Crawler(object):
             status,uid,access_token = result
             self.failed.write(uid+","+access_token+"\n")
         else:
-            print result
             uid = result[1]["id"]
             result = map(lambda y: json.dumps(y),result)
             status,basic_info,likes_info = result
