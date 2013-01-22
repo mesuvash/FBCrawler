@@ -24,7 +24,7 @@ def fb_call(call, args=None, no_processing=False):
     response = urllib.urlopen(request).read()
     json_response = json.loads(response)
     if isError(json_response):
-        raise FBApiCallError(call + json_response)
+        raise FBApiCallError("Error ID : " + str(call) + "\n" + response)
     return json_response
 
 
