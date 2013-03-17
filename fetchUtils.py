@@ -45,8 +45,26 @@ def get_fb_likes(uid, access_token, limit=1000):
     return get_fb_likes_recursively(response)
 
 
+def get_fb_friends(uid, access_token, limit=1000):
+    """
+    Call graph api to get user's friends information
+    """
+    def get_fb_friends_recursively(response):
+        if "next" in response["paging"]:
+            _response = fb_call(response["paging"]["next"],
+                                no_processing=True)
+            return response["data"] + get_fb_friends_recursively(_response)
+        else:
+            return response["data"]
+
+    query = "%s/friends" % uid
+    response = fb_call(query, args={"access_token": access_token, "limit": limit})
+    return get_fb_friends_recursively(response)
+
 def get_fb_basic_info(uid, access_token):
     """
     Call graph api to get user's basic information
     """
-    return fb_call(uid, args={"access_token": access_token})
+    basic_info = fb_call(uid, args={"access_token": access_token})
+    basic_info["friends"] = get_fb_friends(uid,access_token)
+    return basic_info
